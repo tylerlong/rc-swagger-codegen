@@ -1,8 +1,10 @@
 import { swagger, paths, segments, routes, actions } from './swagger';
+import * as nunjucks from 'nunjucks';
 
-
-console.log(swagger.info.title);
-console.log(paths);
-console.log(segments);
-console.log(routes);
-console.log(actions);
+for (const segment of segments) {
+    const models = routes[segment];
+    const methods = actions[segment];
+    const result = nunjucks.renderString("hello world {{ name }}", { name: 'Tyler' });
+    console.log(result);
+    break;
+}

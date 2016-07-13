@@ -1,0 +1,22 @@
+{
+  "name": "rc-swagger-codegen",
+  "version": "1.0.0",
+  "description": "RingCentral Swagger Code Generation",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tylerlong/rc-swagger-codegen.git"
+  },
+  "author": "Tyler Long <tyler4long@gmail.com> (https://github.com/tylerlong)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tylerlong/rc-swagger-codegen/issues"
+  },
+  "homepage": "https://github.com/tylerlong/rc-swagger-codegen#readme",
+  "dependencies": {
+    "nunjucks": "^2.4.2"
+  }
+}
