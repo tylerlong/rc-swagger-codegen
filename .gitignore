@@ -1,5 +1,6 @@
 *.js
 *.map
 typings/
-generated/
 node_modules/
+bin/
+obj/

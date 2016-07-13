@@ -5,6 +5,8 @@
         "*.js": true,
         "*.map": true,
         "typings/": true,
-        "node_modules/": true
+        "node_modules/": true,
+        "csharp/bin/": true,
+        "csharp/obj/": true
     }
 }
