@@ -2,6 +2,8 @@ namespace RingCentral
 {
     public partial class Token
     {
+        public Token() : base(null) { }
+
         public string access_token;
         public string token_type;
         public int? expires_in;
