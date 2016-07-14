@@ -7,6 +7,7 @@
         "typings/": true,
         "node_modules/": true,
         "csharp/bin/": true,
-        "csharp/obj/": true
+        "csharp/obj/": true,
+        "csharp/project.lock.json": true
     }
 }
