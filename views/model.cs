@@ -13,7 +13,7 @@ namespace RingCentral
         }
 
         {% for model in models %}
-        public {{ model | pascalCase }} {{ model | pascalCase }}(string _id = null)
+        public {{ model | pascalCase }} {{ model | pascalCase }}(string _id = {% if model == 'account' or model == 'extension' %}"~"{% else %}null{% endif %})
         {
             return new {{ model | pascalCase }}(this, _id);
         }

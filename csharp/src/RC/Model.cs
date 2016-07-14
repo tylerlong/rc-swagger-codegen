@@ -16,7 +16,7 @@ namespace RingCentral
 
         public virtual string Endpoint(bool withId = true)
         {
-            var url = parent.Endpoint(withId).AppendPathSegment(PathSegment);
+            var url = parent.Endpoint().AppendPathSegment(PathSegment);
             if (withId && _id != null)
             {
                 url = url.AppendPathSegment(_id);
