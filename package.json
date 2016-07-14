@@ -4,8 +4,7 @@
   "description": "RingCentral Swagger Code Generation",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js",
-    "cs": "cd csharp && dotnet run"
+    "test": "node index.js && cd csharp/test/RC.Tests && dotnet test"
   },
   "repository": {
     "type": "git",
