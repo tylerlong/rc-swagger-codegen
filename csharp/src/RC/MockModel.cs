@@ -15,12 +15,9 @@ namespace RingCentral
             }
         }
 
-        protected override string Endpoint
+        protected override string Endpoint(bool withId)
         {
-            get
-            {
-                return "";
-            }
+            return "";
         }
 
         private RestClient rc;

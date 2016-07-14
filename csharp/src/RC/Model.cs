@@ -14,17 +14,19 @@ namespace RingCentral
             this._id = _id;
         }
 
-        protected virtual string Endpoint
+        protected virtual string Endpoint(bool withId = true)
         {
-            get
+            var url = parent.Endpoint(withId).AppendPathSegment(PathSegment);
+            if (withId && _id != null)
             {
-                var url = parent.Endpoint.AppendPathSegment(PathSegment);
-                if (_id != null)
-                {
-                    url = url.AppendPathSegment(_id);
-                }
-                return url.Path;
+                url = url.AppendPathSegment(_id);
             }
+            return url.Path;
+        }
+
+        public string Url(bool withId = true)
+        {
+            return RC.server.AppendPathSegment(Endpoint(withId));
         }
 
         protected virtual RestClient RC
