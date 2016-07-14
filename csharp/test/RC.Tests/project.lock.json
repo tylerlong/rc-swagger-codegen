@@ -7538,7 +7538,7 @@
     },
     "RC/1.0.0": {
       "type": "project",
-      "path": "../RC/project.json"
+      "path": "../../src/RC/project.json"
     }
   },
   "projectFileDependencyGroups": {

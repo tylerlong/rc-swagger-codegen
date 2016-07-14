@@ -1,6 +1,6 @@
 {
     "projects":[
-        "RC",
-        "RC.Test"
+        "src",
+        "test"
     ]
 }
