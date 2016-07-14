@@ -15,7 +15,7 @@ namespace RingCentral
             }
         }
 
-        protected override string Endpoint(bool withId)
+        public override string Endpoint(bool withId)
         {
             return "";
         }

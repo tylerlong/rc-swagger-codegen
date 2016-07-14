@@ -13,6 +13,8 @@ namespace RringCentral.Test
             var restapi = rc.Restapi();
             Assert.Equal(rc.server + "/restapi/v1.0", restapi.Url());
             Assert.Equal(rc.server + "/restapi", restapi.Url(false));
+            Assert.Equal("/restapi/v1.0", restapi.Endpoint());
+            Assert.Equal("/restapi", restapi.Endpoint(false));
         }
     }
 }
