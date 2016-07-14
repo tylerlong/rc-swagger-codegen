@@ -11,5 +11,12 @@ namespace RingCentral
                 return "{{ segment }}";
             }
         }
+
+        {% for model in models %}
+        public {{ model | pascalCase }} {{ model | pascalCase }}(string _id = null)
+        {
+            return new {{ model | pascalCase }}(this, _id);
+        }
+        {% endfor %}
     }
 }
