@@ -2,6 +2,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { isValidSegment, isListAction } from './util';
 
+
 const swaggerPath: string = path.join(__dirname, './swagger/advanced.json');
 
 
@@ -46,4 +47,14 @@ for (const path of Object.keys(swagger.paths)) {
 }
 
 
-export { swagger, paths, segments, routes, actions }
+const structures = new Map<string, string>();
+for(const segment of segments) {
+    console.log(segment);
+    const regex = new RegExp(`/${segment}/\{[^{}/]+\}$`);
+    const path = paths.filter(path => path.match(regex) != null)[0];
+    console.log(path)
+    // break;
+}
+
+
+export { swagger, paths, segments, routes, actions, structures }
