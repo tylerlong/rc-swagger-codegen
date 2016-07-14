@@ -1,7 +1,6 @@
 using Xunit;
-using RingCentral;
 
-namespace RringCentral.Test
+namespace RingCentral.Test
 {
     public class DictionaryTest
     {
