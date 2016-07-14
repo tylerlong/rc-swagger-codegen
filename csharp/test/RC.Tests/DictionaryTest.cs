@@ -1,9 +1,17 @@
+using System.Net;
 using Xunit;
 
 namespace RingCentral.Test
 {
+    [Collection("RestClient collection")]
     public class DictionaryTest
     {
+        private RestClient rc;
+        public DictionaryTest(RestClientFixture fixture)
+        {
+            rc = fixture.rc;
+        }
+
         [Fact]
         public void MockTest()
         {
@@ -14,6 +22,16 @@ namespace RingCentral.Test
             Assert.NotNull(location);
             var state = dictionary.State();
             Assert.NotNull(state);
+        }
+
+        [Fact]
+        public void TestGet()
+        {
+            var country = rc.Restapi().Dictionary().Country("46");
+            var response = rc.Get(country.Endpoint()).Result;
+            Assert.NotNull(response);
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Contains("China", response.Content.ReadAsStringAsync().Result);
         }
     }
 }
