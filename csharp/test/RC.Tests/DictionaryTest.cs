@@ -1,16 +1,16 @@
-﻿using Xunit;
+using Xunit;
 using RingCentral;
 
 namespace RringCentral.Test
 {
-    public class RestClientTest
+    public class DictionaryTest
     {
         [Fact]
         public void MockTest()
         {
             var rc = new RestClient("", "", "");
-            var restapi = rc.Restapi();
-            Assert.NotNull(restapi);
+            // var dictionary = rc.Restapi().Dictionary();
+            // Assert.NotNull(dictionary);
         }
     }
 }
