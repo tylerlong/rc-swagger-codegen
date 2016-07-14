@@ -1,4 +1,5 @@
 using System.IO;
+using System.Reflection;
 using Newtonsoft.Json;
 
 namespace RingCentral.Test
@@ -14,7 +15,9 @@ namespace RingCentral.Test
             {
                 if (instance == null)
                 {
-                    var jsonStr = File.ReadAllText("./bin/Debug/config.json");
+                    var assemblyLocation = typeof(Config).GetTypeInfo().Assembly.Location;
+                    var configFilePath = Path.Combine(Path.GetDirectoryName(assemblyLocation), "../config.json");
+                    var jsonStr = File.ReadAllText(configFilePath);
                     instance = JsonConvert.DeserializeObject<Config>(jsonStr);
                 }
                 return instance;
