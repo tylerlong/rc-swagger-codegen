@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace RingCentral
 {
-    public class RC
+    public partial class RC
     {
         public const string SandboxServer = "https://platform.devtest.ringcentral.com";
         public const string ProductionServer = "https://platform.ringcentral.com";
@@ -132,9 +132,9 @@ namespace RingCentral
 
 
 
-        // public Restapi Restapi(string _id = "v1.0")
-        // {
-        //     return new Restapi(new MockModel(this), _id);
-        // }
+        public Restapi Restapi(string _id = "v1.0")
+        {
+            return new Restapi(new MockModel(this), _id);
+        }
     }
 }
