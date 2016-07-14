@@ -1,16 +1,15 @@
-public partial class {{ segment | pascalCase }}
+namespace RingCentral
 {
-    {% for method in methods %}
-    public void {{ method }}()
+    public partial class {{ segment | pascalCase }} : Model
     {
+        internal {{ segment | pascalCase }}(Model parent, string _id = null) : base(parent, _id) { }
 
+        protected override string PathSegment
+        {
+            get
+            {
+                return "{{ segment }}";
+            }
+        }
     }
-    {% endfor %}
-
-    {% for model in models %}
-    public {{ model | pascalCase }} {{ model | pascalCase }}()
-    {
-        return new {{ model | pascalCase }}();
-    }
-    {% endfor %}
 }

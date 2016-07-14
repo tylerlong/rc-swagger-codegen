@@ -4,3 +4,4 @@ typings/
 node_modules/
 bin/
 obj/
+Generated/
