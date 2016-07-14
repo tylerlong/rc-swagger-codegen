@@ -1,9 +1,9 @@
 {
   "version": "1.0.0-*",
-  "testRunner": "xunit",
+  // "testRunner": "xunit",
   "buildOptions": {
     "debugType": "portable",
-    "emitEntryPoint": false
+    "emitEntryPoint": true
   },
   "dependencies": {
     "RC": {
