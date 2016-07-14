@@ -17,6 +17,37 @@
           "lib/netcoreapp1.0/dotnet-test-xunit.dll": {}
         }
       },
+      "Flurl/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Linq": "4.0.0",
+          "System.Reflection.TypeExtensions": "4.0.0"
+        },
+        "compile": {
+          "lib/dotnet5.4/Flurl.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Flurl.dll": {}
+        }
+      },
+      "Flurl.Http/0.10.1": {
+        "type": "package",
+        "dependencies": {
+          "Flurl": "2.0.0",
+          "Newtonsoft.Json": "8.0.3",
+          "System.Dynamic.Runtime": "4.0.10",
+          "System.IO.FileSystem": "4.0.0",
+          "System.Net.Http": "4.0.0",
+          "System.Text.RegularExpressions": "4.0.10",
+          "System.Threading": "4.0.10"
+        },
+        "compile": {
+          "lib/dotnet5.4/Flurl.Http.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Flurl.Http.dll": {}
+        }
+      },
       "Libuv/1.9.0": {
         "type": "package",
         "dependencies": {
@@ -2479,6 +2510,15 @@
         "runtime": {
           "lib/netstandard1.1/xunit.runner.utility.dotnet.dll": {}
         }
+      },
+      "RC/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v1.0",
+        "dependencies": {
+          "Flurl": "2.0.0",
+          "Flurl.Http": "0.10.1",
+          "Microsoft.NETCore.App": "1.0.0"
+        }
       }
     }
   },
@@ -2496,6 +2536,40 @@
         "runtimes/unix-x64/lib/net451/dotnet-test-xunit.exe",
         "runtimes/win7-x64/lib/net451/dotnet-test-xunit.exe",
         "runtimes/win7-x86/lib/net451/dotnet-test-xunit.exe"
+      ]
+    },
+    "Flurl/2.0.0": {
+      "sha512": "7yvoh2arCioXljalQR87DccyFMFRGOfKOv0TI8jKNHUJ6K/fkfFPKH0k5AvFqtT3wgorV3Ks8mF/3pj0KwSttg==",
+      "type": "package",
+      "path": "Flurl/2.0.0",
+      "files": [
+        "Flurl.2.0.0.nupkg.sha512",
+        "Flurl.nuspec",
+        "lib/dotnet5.4/Flurl.dll",
+        "lib/dotnet5.4/Flurl.pdb",
+        "lib/dotnet5.4/Flurl.xml",
+        "lib/portable-net40+win+wpa81+wp80+MonoAndroid10+MonoTouch10/Flurl.XML",
+        "lib/portable-net40+win+wpa81+wp80+MonoAndroid10+MonoTouch10/Flurl.dll",
+        "lib/portable-net40+win+wpa81+wp80+MonoAndroid10+MonoTouch10/Flurl.pdb"
+      ]
+    },
+    "Flurl.Http/0.10.1": {
+      "sha512": "0sseBEGo7wy7f3n5BOz9fmh9f+GqYbTIc2SpYcFWmCCnQjFkOUrOU5kD/BjKpCV86vuv8z2eRSV8MUm5gNSpag==",
+      "type": "package",
+      "path": "Flurl.Http/0.10.1",
+      "files": [
+        "Flurl.Http.0.10.1.nupkg.sha512",
+        "Flurl.Http.nuspec",
+        "lib/dotnet5.4/Flurl.Http.dll",
+        "lib/dotnet5.4/Flurl.Http.pdb",
+        "lib/dotnet5.4/Flurl.Http.xml",
+        "lib/net45/Flurl.Http.XML",
+        "lib/net45/Flurl.Http.dll",
+        "lib/net45/Flurl.Http.pdb",
+        "lib/portable-net45+win+wpa81+wp80/Flurl.Http.dll",
+        "lib/portable-net45+win+wpa81+wp80/Flurl.Http.dll.config",
+        "lib/portable-net45+win+wpa81+wp80/Flurl.Http.pdb",
+        "lib/portable-net45+win+wpa81+wp80/Flurl.Http.xml"
       ]
     },
     "Libuv/1.9.0": {
@@ -7461,10 +7535,15 @@
         "xunit.runner.utility.2.2.0-beta2-build3300.nupkg.sha512",
         "xunit.runner.utility.nuspec"
       ]
+    },
+    "RC/1.0.0": {
+      "type": "project",
+      "path": "../RC/project.json"
     }
   },
   "projectFileDependencyGroups": {
     "": [
+      "RC >= 1.0.0",
       "dotnet-test-xunit >= 2.2.0-preview2-build1029",
       "xunit >= 2.2.0-beta2-build3300"
     ],
