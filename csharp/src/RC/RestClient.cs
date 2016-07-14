@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace RingCentral
 {
-    public partial class RC
+    public partial class RestClient
     {
         public const string SandboxServer = "https://platform.devtest.ringcentral.com";
         public const string ProductionServer = "https://platform.ringcentral.com";
@@ -13,13 +13,13 @@ namespace RingCentral
         public string appSecret;
         public string server;
 
-        public RC(string appKey, string appSecret, string server)
+        public RestClient(string appKey, string appSecret, string server)
         {
             this.appKey = appKey;
             this.appSecret = appSecret;
             this.server = server;
         }
-        public RC(string appKey, string appSecret, bool production = false)
+        public RestClient(string appKey, string appSecret, bool production = false)
             : this(appKey, appSecret, production ? ProductionServer : SandboxServer)
         {
         }
@@ -129,7 +129,6 @@ namespace RingCentral
             client.PostUrlEncodedAsync(requestBody);
             token = null;
         }
-
 
 
         public Restapi Restapi(string _id = "v1.0")

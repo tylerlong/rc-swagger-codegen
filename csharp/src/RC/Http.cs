@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RingCentral
 {
-    public partial class RC
+    public partial class RestClient
     {
         private FlurlClient GetClient(string endpoint, object queryParams)
         {

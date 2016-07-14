@@ -27,7 +27,7 @@ namespace RingCentral
             }
         }
 
-        protected virtual RC RC
+        protected virtual RestClient RC
         {
             get
             {

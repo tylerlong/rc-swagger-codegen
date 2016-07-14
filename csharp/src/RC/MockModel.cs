@@ -2,7 +2,7 @@ namespace RingCentral
 {
     public class MockModel : Model
     {
-        public MockModel(RC rc) : base(null)
+        public MockModel(RestClient rc) : base(null)
         {
             this.rc = rc;
         }
@@ -23,8 +23,8 @@ namespace RingCentral
             }
         }
 
-        private RC rc;
-        protected override RC RC
+        private RestClient rc;
+        protected override RestClient RC
         {
             get
             {

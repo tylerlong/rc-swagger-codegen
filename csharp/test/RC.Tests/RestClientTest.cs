@@ -1,4 +1,5 @@
 ﻿using Xunit;
+using RingCentral;
 
 namespace RringCentral.Test
 {
@@ -7,7 +8,7 @@ namespace RringCentral.Test
         [Fact]
         public void PassingTest()
         {
-            var rc = new RingCentral.RC("", "", "");
+            var rc = new RestClient("", "", "");
             var restapi = rc.Restapi();
             Assert.NotNull(restapi);
         }
