@@ -4,7 +4,7 @@
   "description": "RingCentral Swagger Code Generation",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js && cd csharp/test/RC.Tests && dotnet test"
+    "test": "jasmine && node index.js && cd csharp/test/RC.Tests && dotnet test"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,8 @@
   "dependencies": {
     "change-case": "^3.0.0",
     "nunjucks": "^2.4.2"
+  },
+  "devDependencies": {
+    "jasmine": "^2.4.1"
   }
 }
