@@ -1,3 +1,5 @@
+{% import "cs/macros.cs" as macros -%}
+
 namespace RingCentral
 {
     public partial class {{ segment | pascalCase }} : Model
@@ -11,6 +13,8 @@ namespace RingCentral
                 return "{{ segment }}";
             }
         }
+
+        {{ hasIds.get(segment) }}
 
         {% for model in models %}
         public {{ model | pascalCase }} {{ model | pascalCase }}(string _id = {% if model == 'account' or model == 'extension' %}"~"{% else %}null{% endif %})
