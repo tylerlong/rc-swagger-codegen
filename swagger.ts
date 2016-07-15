@@ -47,14 +47,15 @@ for (const path of Object.keys(swagger.paths)) {
 }
 
 
-const structures = new Map<string, string>();
-for(const segment of segments) {
-    console.log(segment);
-    const regex = new RegExp(`/${segment}/\{[^{}/]+\}$`);
-    const path = paths.filter(path => path.match(regex) != null)[0];
-    console.log(path)
-    // break;
+const hasIds = new Map<string, boolean>();
+const pathsStr = paths.join('\n');
+for (const segment of segments) {
+    hasIds.set(segment, false);
+    const hasIdRegex = new RegExp(`/${segment}/(?:\{[^{}/]+\}|v1\.0)(?:/|$)`, 'm');
+    if (hasIdRegex.test(pathsStr)) {
+        hasIds.set(segment, true);
+    }
 }
 
 
-export { swagger, paths, segments, routes, actions, structures }
+export { swagger, paths, segments, routes, actions, hasIds };
