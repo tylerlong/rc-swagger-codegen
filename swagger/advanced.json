@@ -4600,6 +4600,30 @@
         }
       ]
     },
+    "/restapi/v1.0/account/{accountId}/extension/{extensionId}/address-book/group/{groupId}": {
+      "get": {
+        "description": "Get Contact Group by ID",
+        "responses": {
+          "default": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GroupInfo"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/accountId"
+        },
+        {
+          "$ref": "#/parameters/extensionId"
+        },
+        {
+          "$ref": "#/parameters/groupId"
+        }
+      ]
+    },
     "/restapi/v1.0/account/{accountId}/extension/{extensionId}/answering-rule/{answeringRuleId}": {
       "get": {
         "description": "Get Custom Answering Rule by ID",
