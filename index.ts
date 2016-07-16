@@ -4,7 +4,10 @@ import { pascalCase } from 'change-case';
 import * as fs from 'fs';
 
 
-const env = nunjucks.configure('views');
+const env = nunjucks.configure('views', {
+  trimBlocks: true,
+  lstripBlocks: true,
+});
 env.addFilter('pascalCase', pascalCase);
 
 const generateModel = (segment) => {

@@ -15,7 +15,7 @@ namespace RingCentral
         }
 
         {% for model in models %}
-        {{ macros.model_route(model, hasIds.get(model)) }}
+        {{ macros.model_route(model, hasIds.get(model)) | indent(8, false) }}
         {% endfor %}
     }
 }
