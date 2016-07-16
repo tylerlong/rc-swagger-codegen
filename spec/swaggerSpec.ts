@@ -1,8 +1,8 @@
 import { hasIds } from '../swagger';
 
 
-describe("swagger", function () {
-    describe("hasIds", function () {
+describe("swagger", () => {
+    describe("hasIds", () => {
         it("dictionary has no id", () => {
             expect(hasIds.get('dictionary')).toBe(false);
         });

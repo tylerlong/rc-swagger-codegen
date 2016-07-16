@@ -11,8 +11,8 @@ const isValidSegment = (s: string): boolean => {
     return true;
 };
 
-const isListAction = (name: string, value): boolean => {
-    if (name == '/restapi') {
+const isListAction = (path: string, value): boolean => {
+    if (path == '/restapi') {
         return true;
     }
     const properties = value.get.responses.default.schema.properties;
