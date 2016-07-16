@@ -1,4 +1,4 @@
-{% import "cs/macros.cs" as macros -%}
+{% import "macros.cs" as macros -%}
 
 namespace RingCentral
 {
@@ -14,13 +14,8 @@ namespace RingCentral
             }
         }
 
-        {{ hasIds.get(segment) }}
-
         {% for model in models %}
-        public {{ model | pascalCase }} {{ model | pascalCase }}(string _id = {% if model == 'account' or model == 'extension' %}"~"{% else %}null{% endif %})
-        {
-            return new {{ model | pascalCase }}(this, _id);
-        }
+        {{ macros.model_route(model, hasIds.get(model)) }}
         {% endfor %}
     }
 }
