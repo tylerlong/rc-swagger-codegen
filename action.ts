@@ -1,5 +1,6 @@
 import { isValidSegment } from './util';
 import { swagger, paths } from './swagger';
+import * as _ from 'lodash';
 
 
 class Action {
@@ -132,6 +133,12 @@ class Action {
     public responseModel(language: string, name: string): string {
         return this.json2model(this.responseBody(), language, name);
     }
+
+    public equals(other: Action): boolean {
+        return (this.segment == other.segment && this.hasId == other.hasId && this.method == other.method
+            && this.name == other.name && _.isEqual(this.queryParams(), other.queryParams())
+            && _.isEqual(this.requestBody(), other.requestBody()) && _.isEqual(this.responseBody(), other.responseBody()));
+    }
 }
 
 
@@ -144,7 +151,9 @@ for (const path of paths) {
         if (!actions.has(segment)) {
             actions.set(segment, new Array<Action>());
         }
-        actions.get(segment).push(action);
+        if (actions.get(segment).find(item => item.equals(action)) == undefined) {
+            actions.get(segment).push(action);
+        }
     }
 }
 

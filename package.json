@@ -19,6 +19,7 @@
   "dependencies": {
     "change-case": "^3.0.0",
     "json2model": "^0.1.6",
+    "lodash": "^4.13.1",
     "nunjucks": "^2.4.2"
   },
   "devDependencies": {
