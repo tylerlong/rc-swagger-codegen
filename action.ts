@@ -109,7 +109,11 @@ class Action {
     }
 
     public responseBody(): any {
-        return {};
+        const schema = swagger.paths[this.path][this.method].responses.default.schema;
+        if(schema == undefined) {
+            return null;
+        }
+        return this.getSampleSchema(schema);
     }
 }
 

@@ -121,5 +121,11 @@ describe("actions", () => {
                 timezone: { id: 's' }}, allowJoinBeforeHost: true, startHostVideo: true,
                 startParticipantsVideo: true, audioOptions: ['s']});
         });
+        it("should have no response body for delete meeting", () => {
+            const action = actions.get('meeting').find(item => item.method == 'delete');
+            expect(action).not.toBe(null);
+            const responseBody = action.responseBody();
+            expect(responseBody).toBeNull();
+        });
     });
 });
