@@ -60,7 +60,7 @@ class Action {
                 }
             }
         }
-        return {};
+        return result;
     }
 
     private getSampleSchema(schema: any) {
