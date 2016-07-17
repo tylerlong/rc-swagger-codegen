@@ -17,9 +17,9 @@ class Action {
         this.hasId = !isValidSegment(path.split('/').reverse()[0]);
     }
 
-    private getName() : string {
-        if(this.method == 'get') {
-            if(this.path == '/restapi') {
+    private getName(): string {
+        if (this.method == 'get') {
+            if (this.path == '/restapi') {
                 return 'list';
             }
             const properties = swagger.paths[this.path].get.responses.default.schema.properties;
@@ -31,8 +31,8 @@ class Action {
         return this.method;
     }
 
-    private getSampleValue(type: string) : any {
-        switch(type) {
+    private getSampleValue(type: string): any {
+        switch (type) {
             case 'integer':
                 return 1;
             case 'string':
@@ -46,32 +46,66 @@ class Action {
         }
     }
 
-    public queryParams() : any {
-        const parameters : any = swagger.paths[this.path][this.method].parameters;
-        if(parameters == undefined) {
+    private getSampleProps(props: any): any {
+        const result = {};
+        for (const prop of Object.keys(props)) {
+            if (props[prop]['$ref'] != undefined) {
+                result[prop] = this.getSampleSchema(props[prop]);
+            } else {
+                result[prop] = this.getSampleValue(props[prop].type);
+            }
+        }
+        return {};
+    }
+
+    private getSampleSchema(schema: any) {
+        if (schema.properties != undefined) {
+            return this.getSampleProps(schema.properties);
+        }
+        if (schema['$ref'] != undefined) {
+            const refTokens = schema['$ref'].split('/');
+            return this.getSampleProps(swagger[refTokens[1]][refTokens[2]].properties);
+        }
+        if (schema.enum != undefined) {
+            return schema.enum.map(item => this.getSampleSchema(item));
+        }
+        throw `unexpected schema: ${schema}`;
+    }
+
+    public queryParams(): any {
+        const parameters: any = swagger.paths[this.path][this.method].parameters;
+        if (parameters == undefined) {
             return null;
         }
         const result = {};
-        for(const parameter of parameters) {
+        for (const parameter of parameters) {
             result[parameter.name] = this.getSampleValue(parameter.type);
         }
         return result;
     }
 
-    public requestBody() : any {
-        return {};
+    public requestBody(): any {
+        const parameters: any = swagger.paths[this.path][this.method].parameters;
+        if (parameters == undefined) {
+            return null;
+        }
+        const bodyParam = parameters.find((item) => item.name == 'body');
+        if (bodyParam == undefined) {
+            return null;
+        }
+        return this.getSampleSchema(bodyParam.schema);
     }
 
-    public responseBody() : any {
+    public responseBody(): any {
         return {};
     }
 }
 
 
 const actions = new Map<string, Action[]>();
-for(const path of paths) {
+for (const path of paths) {
     const methods = Object.keys(swagger.paths[path]).filter(m => ['get', 'post', 'put', 'delete'].indexOf(m) != -1);
-    for(const method of methods) {
+    for (const method of methods) {
         const action = new Action(path, method);
         const segment = action.segment;
         if (!actions.has(segment)) {

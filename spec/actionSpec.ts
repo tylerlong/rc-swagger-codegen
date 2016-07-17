@@ -38,14 +38,34 @@ describe("action", () => {
             expect(action.segment).toBe('country');
             expect(action.queryParams()).toBeNull();
         });
-        it('should generate queryString', () => {
+    });
+
+    describe("queryParams", () => {
+        it('should generate queryParams', () => {
             let action = new Action('/restapi/v1.0/dictionary/state', 'get');
             expect(action.queryParams()).toEqual({ page: 1, perPage: 1, countryId: 1, withPhoneNumbers: true });
             action = new Action('/restapi/v1.0/account/{accountId}/phone-number', 'get');
             expect(action.queryParams()).toEqual({ page: 1, perPage: 1, usageType: 's' });
         });
     });
-    describe("actions", () => {
+
+    describe("requestBody", () => {
+        it('should generate requestBody', () => {
+            let action = new Action('/restapi/v1.0/dictionary/state', 'get');
+            expect(action.requestBody()).toBeNull();
+            action = new Action('/restapi/v1.0/account/{accountId}/phone-number', 'get');
+            expect(action.requestBody()).toBeNull();
+            action = new Action('/restapi/v1.0/account/{accountId}/extension/{extensionId}/meeting', 'post');
+            expect(Array.isArray(action.requestBody())).toBeFalsy();
+            action = new Action('/restapi/v1.0/account/{accountId}/extension/{extensionId}', 'put');
+            expect(Array.isArray(action.requestBody())).toBeTruthy();
+        });
+    });
+});
+
+
+describe("actions", () => {
+    describe("number of actions", () => {
         it("should contain no action", () => {
             expect(actions.has('dictionary')).toBeFalsy();
             expect(actions.has('oauth')).toBeFalsy();
