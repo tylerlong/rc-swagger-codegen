@@ -85,7 +85,7 @@ class Action {
             return null;
         }
         const { render } = require(`json2model/controllers/${language}`);
-        return render(name, json);
+        return render(name, json, false);
     }
 
     public queryParams(): any {
