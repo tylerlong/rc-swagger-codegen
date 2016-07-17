@@ -118,7 +118,7 @@ describe("actions", () => {
             expect(responseBody).not.toEqual({});
             expect(responseBody).toEqual({ uri: 's', id: 's', topic: 's', meetingType: 's', password: 's',
                 status: 's', links: { startUri: 's', joinUri: 's' }, schedule: { startTime: 's', durationInMinutes: 1,
-                timezone: { id: 's' }}, allowJoinBeforeHost: true, startHostVideo: true,
+                timeZone: { id: 's' }}, allowJoinBeforeHost: true, startHostVideo: true,
                 startParticipantsVideo: true, audioOptions: ['s']});
         });
         it("should have no response body for delete meeting", () => {
