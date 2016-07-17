@@ -24,7 +24,7 @@ namespace RingCentral
 
         {% if actions.has(segment) %}
         {% for action in actions.get(segment) %}
-        {% if action.name == 'get' and segment != 'content' and segment != 'profile-image' %}
+        {% if action.name == 'get' and segment != 'service-info' and segment != 'content' and segment != 'profile-image' %}
         {{ macros.action(action) | indent(8, false) }}
         {% endif %}
         {% endfor %}
