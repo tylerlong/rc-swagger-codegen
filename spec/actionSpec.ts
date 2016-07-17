@@ -110,4 +110,16 @@ describe("actions", () => {
                 birthday: 's', webPage: 's', notes: 's' });
         });
     });
+    describe("responseBody", () => {
+        it("should generate for create meeting", () => {
+            const action = actions.get('meeting').find(item => item.method == 'post');
+            expect(action).not.toBe(null);
+            const responseBody = action.responseBody();
+            expect(responseBody).not.toEqual({});
+            expect(responseBody).toEqual({ uri: 's', id: 's', topic: 's', meetingType: 's', password: 's',
+                status: 's', links: { startUri: 's', joinUri: 's' }, schedule: { startTime: 's', durationInMinutes: 1,
+                timezone: { id: 's' }}, allowJoinBeforeHost: true, startHostVideo: true,
+                startParticipantsVideo: true, audioOptions: ['s']});
+        });
+    });
 });
