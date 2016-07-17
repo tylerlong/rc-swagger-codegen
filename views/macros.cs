@@ -68,6 +68,19 @@ post()
 {% macro put_action(action) -%}
 put()
 {%- endmacro %}
+
+
 {% macro delete_action(action) -%}
-delete()
+{% if action.queryParams() == null %}
+public void Delete()
+{
+    RC.Delete({{ endpoint(action) }});
+}
+{% else %}
+public void Delete(DeleteQueryParams queryParams = null)
+{
+    RC.Delete({{ endpoint(action) }});
+}
+{{ action.queryModel('cs', 'DeleteQueryParams') }}
+{% endif %}
 {%- endmacro %}

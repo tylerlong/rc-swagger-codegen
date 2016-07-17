@@ -27,6 +27,9 @@ namespace RingCentral
         {% if action.name == 'get' and segment != 'service-info' and segment != 'content' and segment != 'profile-image' %}
         {{ macros.action(action) | indent(8, false) }}
         {% endif %}
+        {% if action.name == 'delete' %}
+        {{ macros.action(action) | indent(8, false) }}
+        {% endif %}
         {% endfor %}
         {% endif %}
     }
