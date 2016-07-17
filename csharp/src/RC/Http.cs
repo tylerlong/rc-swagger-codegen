@@ -46,6 +46,12 @@ namespace RingCentral
             return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
         }
 
+        public async Task<T> Put<T>(string endpoint, object requestBody, object queryParams = null)
+        {
+            var response = await Put(endpoint, requestBody, queryParams);
+            return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
+        }
+
         public Task<Stream> GetStream(string endpoint, object queryParams = null)
         {
             var client = GetClient(endpoint, queryParams);

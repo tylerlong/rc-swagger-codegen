@@ -65,8 +65,22 @@ list()
 {% macro post_action(action) -%}
 post()
 {%- endmacro %}
+
+
 {% macro put_action(action) -%}
-put()
+{% if action.queryParams() == null %}
+public Task<PutResponse> Put()
+{
+    return RC.Put<PutResponse>({{ endpoint(action) }}, null);
+}
+{% else %}
+public Task<PutResponse> Put(PutQueryParams queryParams = null)
+{
+    return RC.Put<PutResponse>({{ endpoint(action) }}, queryParams);
+}
+{{ action.queryModel('cs', 'PutQueryParams') }}
+{% endif %}
+{{ action.responseModel('cs', 'PutResponse') }}
 {%- endmacro %}
 
 
@@ -74,12 +88,12 @@ put()
 {% if action.queryParams() == null %}
 public void Delete()
 {
-    RC.Delete({{ endpoint(action) }});
+    RC.Delete({{ endpoint(action) }}, null);
 }
 {% else %}
 public void Delete(DeleteQueryParams queryParams = null)
 {
-    RC.Delete({{ endpoint(action) }});
+    RC.Delete({{ endpoint(action) }}, queryParams);
 }
 {{ action.queryModel('cs', 'DeleteQueryParams') }}
 {% endif %}

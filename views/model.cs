@@ -30,6 +30,9 @@ namespace RingCentral
         {% if action.name == 'delete' %}
         {{ macros.action(action) | indent(8, false) }}
         {% endif %}
+        {% if action.name == 'put' and segment != 'profile-image' %}
+        {{ macros.action(action) | indent(8, false) }}
+        {% endif %}
         {% endfor %}
         {% endif %}
     }
