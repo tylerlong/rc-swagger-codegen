@@ -11,16 +11,5 @@ const isValidSegment = (s: string): boolean => {
     return true;
 };
 
-const isListAction = (path: string, value): boolean => {
-    if (path == '/restapi') {
-        return true;
-    }
-    const properties = value.get.responses.default.schema.properties;
-    if (properties != undefined && properties.navigation != undefined) {
-        return true;
-    }
-    return false;
-}
 
-
-export { isValidSegment, isListAction };
+export { isValidSegment };

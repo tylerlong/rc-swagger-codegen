@@ -1,4 +1,4 @@
-import { Action } from '../action';
+import { Action, actions } from '../action';
 
 
 describe("action", () => {
@@ -43,6 +43,11 @@ describe("action", () => {
             expect(action.queryParams()).toEqual({ page: 1, perPage: 1, countryId: 1, withPhoneNumbers: true });
             action = new Action('/restapi/v1.0/account/{accountId}/phone-number', 'get');
             expect(action.queryParams()).toEqual({ page: 1, perPage: 1, usageType: 's' });
+        });
+    });
+    describe("actions", () => {
+        it("should contain no action", () => {
+            expect(actions.has('dictionary')).toBeFalsy();
         });
     });
 });

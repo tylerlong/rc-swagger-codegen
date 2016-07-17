@@ -1,5 +1,5 @@
 import { isValidSegment } from './util';
-import { swagger } from './swagger';
+import { swagger, paths } from './swagger';
 
 
 class Action {
@@ -68,4 +68,18 @@ class Action {
 }
 
 
-export { Action };
+const actions = new Map<string, Action[]>();
+for(const path of paths) {
+    const methods = Object.keys(swagger.paths[path]).filter(m => ['get', 'post', 'put', 'delete'].indexOf(m) != -1);
+    for(const method of methods) {
+        const action = new Action(path, method);
+        const segment = action.segment;
+        if (!actions.has(segment)) {
+            actions.set(segment, new Array<Action>());
+        }
+        actions.get(segment).push(action);
+    }
+}
+
+
+export { Action, actions };
