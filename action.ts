@@ -52,7 +52,12 @@ class Action {
             if (props[prop]['$ref'] != undefined) {
                 result[prop] = this.getSampleSchema(props[prop]);
             } else {
-                result[prop] = this.getSampleValue(props[prop].type);
+                const type = props[prop].type;
+                if (type == 'array') {
+                    result[prop] = [this.getSampleSchema(props[prop].items)];
+                } else {
+                    result[prop] = this.getSampleValue(type);
+                }
             }
         }
         return {};
@@ -69,12 +74,19 @@ class Action {
         if (schema.enum != undefined) {
             return schema.enum.map(item => this.getSampleSchema(item));
         }
+        if (schema.type != undefined) {
+            return this.getSampleValue(schema.type);
+        }
         throw `unexpected schema: ${schema}`;
     }
 
     public queryParams(): any {
-        const parameters: any = swagger.paths[this.path][this.method].parameters;
+        let parameters: Array<any> = swagger.paths[this.path][this.method].parameters;
         if (parameters == undefined) {
+            return null;
+        }
+        parameters = parameters.filter(item => item.in == 'query');
+        if (parameters.length == 0) {
             return null;
         }
         const result = {};
