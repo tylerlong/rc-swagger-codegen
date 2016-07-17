@@ -1,5 +1,9 @@
 {% import "macros.cs" as macros -%}
 
+{% if actions.has(segment) %}
+using System.Threading.Tasks;
+
+{% endif %}
 namespace RingCentral
 {
     public partial class {{ segment | pascalCase }} : Model
@@ -17,5 +21,13 @@ namespace RingCentral
         {% for model in models %}
         {{ macros.model_route(model, hasIds.get(model)) | indent(8, false) }}
         {% endfor %}
+
+        {% if actions.has(segment) %}
+        {% for action in actions.get(segment) %}
+        {% if action.name == 'get' %}
+        {{ macros.action(action) | indent(8, false) }}
+        {% endif %}
+        {% endfor %}
+        {% endif %}
     }
 }

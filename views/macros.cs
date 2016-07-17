@@ -20,3 +20,52 @@ public {{ model | pascalCase }} {{ model | pascalCase }}()
 }
 {% endif %}
 {%- endmacro %}
+
+
+{% macro endpoint(action) -%}
+Endpoint({% if action.hasId %}true{% else %}false{% endif %})
+{%- endmacro %}
+
+
+{% macro action(action) -%}
+{% if action.name == 'get' %}
+{{ get_action(action) }}
+{% elif action.name == 'list' %}
+{{ list_action(action) }}
+{% elif action.name == 'post' %}
+{{ post_action(action) }}
+{% elif action.name == 'put' %}
+{{ put_action(action) }}
+{% elif action.name == 'delete' %}
+{{ delete_action(action) }}
+{% endif %}
+{%- endmacro %}
+
+
+{% macro get_action(action) -%}
+{% if action.queryParams() == null %}
+public Task<GetResponse> Get()
+{
+    return RC.Get<GetResponse>({{ endpoint(action) }}, null);
+}
+{% else %}
+public Task<GetResponse> Get(GetQueryParams queryParams = null)
+{
+    return RC.Get<GetResponse>({{ endpoint(action) }}, queryParams);
+}
+{% endif %}
+{%- endmacro %}
+
+
+{% macro list_action(action) -%}
+list()
+{%- endmacro %}
+{% macro post_action(action) -%}
+post()
+{%- endmacro %}
+{% macro put_action(action) -%}
+put()
+{%- endmacro %}
+{% macro delete_action(action) -%}
+delete()
+{%- endmacro %}
