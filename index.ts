@@ -1,13 +1,17 @@
 import { segments, routes, hasIds } from './swagger';
 import * as nunjucks from 'nunjucks';
-import { pascalCase } from 'change-case';
 import * as fs from 'fs';
 import { actions } from './action';
+import * as _ from 'lodash';
 
+
+const pascalCase = (str: string): string => {
+    return _.upperFirst(_.camelCase(str));
+}
 
 const env = nunjucks.configure('views', {
-  trimBlocks: true,
-  lstripBlocks: true,
+    trimBlocks: true,
+    lstripBlocks: true,
 });
 env.addFilter('pascalCase', pascalCase);
 
