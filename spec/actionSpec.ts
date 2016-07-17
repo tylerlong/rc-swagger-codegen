@@ -48,6 +48,18 @@ describe("action", () => {
     describe("actions", () => {
         it("should contain no action", () => {
             expect(actions.has('dictionary')).toBeFalsy();
+            expect(actions.has('oauth')).toBeFalsy();
+        });
+        it("should contain 1 action", () => {
+            expect(actions.get('revoke').length).toBe(1);
+            expect(actions.get('location').length).toBe(1);
+        });
+        it("should contain 2 actions", () => {
+            expect(actions.get('timezone').length).toBe(2);
+            expect(actions.get('state').length).toBe(2);
+        });
+        it("should contain 5 actions", () => {
+            expect(actions.get('meeting').length).toBe(5);
         });
     });
 });
