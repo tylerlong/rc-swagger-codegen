@@ -36,6 +36,9 @@ namespace RingCentral
         {% if action.name == 'list' %}
         {{ macros.action(action) | indent(8, false) }}
         {% endif %}
+        {% if action.name == 'post' and segment != 'profile-image' and segment != 'lookup' and segment != 'revoke' and segment != 'end' %}
+        {{ macros.action(action) | indent(8, false) }}
+        {% endif %}
         {% endfor %}
         {% endif %}
     }
