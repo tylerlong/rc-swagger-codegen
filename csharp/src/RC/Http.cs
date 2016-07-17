@@ -3,6 +3,7 @@ using Flurl.Http;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace RingCentral
 {
@@ -43,6 +44,12 @@ namespace RingCentral
         {
             var response = await Get(endpoint, queryParams);
             return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
+        }
+
+        public Task<Stream> GetStream(string endpoint, object queryParams = null)
+        {
+            var client = GetClient(endpoint, queryParams);
+            return client.GetStreamAsync();
         }
     }
 }

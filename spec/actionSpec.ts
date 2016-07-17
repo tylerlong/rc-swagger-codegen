@@ -127,5 +127,11 @@ describe("actions", () => {
             const responseBody = action.responseBody();
             expect(responseBody).toBeNull();
         });
+        it("should handle binary data", () => {
+            const action = actions.get('profile-image').find(item => item.method == 'get');
+            expect(action).not.toBe(null);
+            const responseBody = action.responseBody();
+            expect(responseBody).toBe('binary');
+        });
     });
 });

@@ -76,6 +76,9 @@ class Action {
             return schema.enum.map(item => this.getSampleSchema(item));
         }
         if (schema.type != undefined) {
+            if(schema.type == 'string' && schema.format == 'binary') {
+                return 'binary';
+            }
             return this.getSampleValue(schema.type);
         }
         throw `unexpected schema: ${schema}`;
