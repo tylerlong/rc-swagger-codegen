@@ -80,6 +80,14 @@ class Action {
         throw `unexpected schema: ${schema}`;
     }
 
+    private json2model(json: string, language: string, name: string): string {
+        if (json == null) {
+            return null;
+        }
+        const { render } = require(`json2model/controllers/${language}`);
+        return render(name, json);
+    }
+
     public queryParams(): any {
         let parameters: Array<any> = swagger.paths[this.path][this.method].parameters;
         if (parameters == undefined) {
@@ -95,6 +103,9 @@ class Action {
         }
         return result;
     }
+    public queryModel(language: string, name: string): string {
+        return this.json2model(this.queryParams(), language, name);
+    }
 
     public requestBody(): any {
         const parameters: any = swagger.paths[this.path][this.method].parameters;
@@ -107,13 +118,19 @@ class Action {
         }
         return this.getSampleSchema(bodyParam.schema);
     }
+    public requestModel(language: string, name: string): string {
+        return this.json2model(this.requestBody(), language, name);
+    }
 
     public responseBody(): any {
         const schema = swagger.paths[this.path][this.method].responses.default.schema;
-        if(schema == undefined) {
+        if (schema == undefined) {
             return null;
         }
         return this.getSampleSchema(schema);
+    }
+    public responseModel(language: string, name: string): string {
+        return this.json2model(this.responseBody(), language, name);
     }
 }
 

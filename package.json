@@ -18,6 +18,7 @@
   "homepage": "https://github.com/tylerlong/rc-swagger-codegen#readme",
   "dependencies": {
     "change-case": "^3.0.0",
+    "json2model": "^0.1.5",
     "nunjucks": "^2.4.2"
   },
   "devDependencies": {

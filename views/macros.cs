@@ -53,7 +53,9 @@ public Task<GetResponse> Get(GetQueryParams queryParams = null)
 {
     return RC.Get<GetResponse>({{ endpoint(action) }}, queryParams);
 }
+{{ action.queryModel('cs', 'GetQueryParams') }}
 {% endif %}
+{{ action.responseModel('cs', 'GetResponse') }}
 {%- endmacro %}
 
 
