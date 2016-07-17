@@ -33,6 +33,9 @@ namespace RingCentral
         {% if action.name == 'put' and segment != 'profile-image' and segment != 'extension' %}
         {{ macros.action(action) | indent(8, false) }}
         {% endif %}
+        {% if action.name == 'list' %}
+        {{ macros.action(action) | indent(8, false) }}
+        {% endif %}
         {% endfor %}
         {% endif %}
     }

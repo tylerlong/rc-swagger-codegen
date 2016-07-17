@@ -60,8 +60,22 @@ public Task<GetResponse> Get(GetQueryParams queryParams = null)
 
 
 {% macro list_action(action) -%}
-list()
+{% if action.queryParams() == null %}
+public Task<ListResponse> List()
+{
+    return RC.Get<ListResponse>({{ endpoint(action) }}, null);
+}
+{% else %}
+public Task<ListResponse> List(ListQueryParams queryParams = null)
+{
+    return RC.Get<ListResponse>({{ endpoint(action) }}, queryParams);
+}
+{{ action.queryModel('cs', 'ListQueryParams') }}
+{% endif %}
+{{ action.responseModel('cs', 'ListResponse') }}
 {%- endmacro %}
+
+
 {% macro post_action(action) -%}
 post()
 {%- endmacro %}
