@@ -10,7 +10,7 @@ describe("action", () => {
             expect(action.name).toBe('list');
             expect(action.path).toBe('/restapi');
             expect(action.segment).toBe('restapi');
-            expect(action.queryString()).toBeNull();
+            expect(action.queryParams()).toBeNull();
         });
         it("should create /restapi/v1.0", () => {
             const action = new Action('/restapi/v1.0', 'get');
@@ -19,7 +19,7 @@ describe("action", () => {
             expect(action.name).toBe('get');
             expect(action.path).toBe('/restapi/v1.0');
             expect(action.segment).toBe('restapi');
-            expect(action.queryString()).toBeNull();
+            expect(action.queryParams()).toBeNull();
         });
         it("should create /restapi/v1.0/dictionary/state", () => {
             const action = new Action('/restapi/v1.0/dictionary/state', 'get');
@@ -36,13 +36,13 @@ describe("action", () => {
             expect(action.name).toBe('get');
             expect(action.path).toBe('/restapi/v1.0/dictionary/country/{countryId}');
             expect(action.segment).toBe('country');
-            expect(action.queryString()).toBeNull();
+            expect(action.queryParams()).toBeNull();
         });
         it('should generate queryString', () => {
             let action = new Action('/restapi/v1.0/dictionary/state', 'get');
-            expect(action.queryString()).toEqual({ page: 1, perPage: 1, countryId: 1, withPhoneNumbers: true });
+            expect(action.queryParams()).toEqual({ page: 1, perPage: 1, countryId: 1, withPhoneNumbers: true });
             action = new Action('/restapi/v1.0/account/{accountId}/phone-number', 'get');
-            expect(action.queryString()).toEqual({ page: 1, perPage: 1, usageType: 's' });
+            expect(action.queryParams()).toEqual({ page: 1, perPage: 1, usageType: 's' });
         });
     });
 });

@@ -46,7 +46,7 @@ class Action {
         }
     }
 
-    public queryString() : any {
+    public queryParams() : any {
         const parameters : any = swagger.paths[this.path][this.method].parameters;
         if(parameters == undefined) {
             return null;
