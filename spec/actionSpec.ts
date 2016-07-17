@@ -82,4 +82,17 @@ describe("actions", () => {
             expect(actions.get('meeting').length).toBe(5);
         });
     });
+    describe("requestBody", () => {
+        it("should generate for create meeting", () => {
+            const action = actions.get('meeting').find(item => item.method == 'post');
+            expect(action).not.toBe(null);
+            const requestBody = action.requestBody();
+            expect(requestBody).not.toEqual({});
+            expect(requestBody).toEqual({ topic: 's', meetingType: 's',
+                password: 's', schedule: { startTime: 's', durationInMinutes: 1, timeZone: {
+                    id: 's'
+                } }, allowJoinBeforeHost: true, startHostVideo: true,
+                startParticipantsVideo: true, audioOptions: ['s'] });
+        });
+    });
 });

@@ -108,9 +108,9 @@ class Action {
         return this.getSampleSchema(bodyParam.schema);
     }
 
-    public responseBody(): any {
-        return {};
-    }
+    // public responseBody(): any {
+    //     return {};
+    // }
 }
 
 
