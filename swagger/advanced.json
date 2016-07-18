@@ -2337,20 +2337,25 @@
       "type": "object",
       "properties": {
         "firstPage": {
-          "type": "string",
-          "description": "Canonical URI for the first page of the list"
+          "$ref": "#/definitions/Page"
         },
         "nextPage": {
-          "type": "string",
-          "description": "Canonical URI for the next page of the list"
+          "$ref": "#/definitions/Page"
         },
         "previousPage": {
-          "type": "string",
-          "description": "Canonical URI for the previous page of the list"
+          "$ref": "#/definitions/Page"
         },
         "lastPage": {
+          "$ref": "#/definitions/Page"
+        }
+      }
+    },
+    "Page": {
+      "type": "object",
+      "properties": {
+        "uri": {
           "type": "string",
-          "description": "Canonical URI for the last page of the list"
+          "description": "Canonical URI for the page"
         }
       }
     },
