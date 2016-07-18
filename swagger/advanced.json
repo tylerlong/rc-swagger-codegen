@@ -4553,6 +4553,12 @@
         "parameters": [
           {
             "type": "string",
+            "description": "Phone number in E.164 (11-digits) format with or without plus '+'. Multiple values are supported",
+            "name": "phoneNumber",
+            "in": "query"
+          },
+          {
+            "type": "string",
             "description": "If specified, only contacts whose First name or Last name start with the mentioned substring are returned. Case-insensitive",
             "name": "startsWith",
             "in": "query"

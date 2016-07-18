@@ -1,6 +1,8 @@
 using Flurl;
 using Flurl.Http;
 using System.Threading.Tasks;
+using Flurl.Http.Configuration;
+using Newtonsoft.Json;
 
 namespace RingCentral
 {
@@ -18,6 +20,11 @@ namespace RingCentral
             this.appKey = appKey;
             this.appSecret = appSecret;
             this.server = server;
+
+            FlurlHttp.Configure(c =>
+            {
+                c.JsonSerializer = new NewtonsoftJsonSerializer(new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            });
         }
         public RestClient(string appKey, string appSecret, bool production = false)
             : this(appKey, appSecret, production ? ProductionServer : SandboxServer)
@@ -61,8 +68,13 @@ namespace RingCentral
         {
             var url = new Url(server).AppendPathSegment("/restapi/oauth/token");
             var client = url.WithBasicAuth(appKey, appSecret);
-            var requestBody = new { username = username, extension = extension,
-                password = password, grant_type = "password" };
+            var requestBody = new
+            {
+                username = username,
+                extension = extension,
+                password = password,
+                grant_type = "password"
+            };
             token = client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token>().Result;
         }
 
@@ -77,8 +89,12 @@ namespace RingCentral
             }
             var url = new Url(server).AppendPathSegment("/restapi/oauth/token");
             var client = url.WithBasicAuth(appKey, appSecret);
-            var requestBody = new { grant_type = "refresh_token", refresh_token = token.refresh_token,
-                endpoint_id = token.endpoint_id };
+            var requestBody = new
+            {
+                grant_type = "refresh_token",
+                refresh_token = token.refresh_token,
+                endpoint_id = token.endpoint_id
+            };
             token = client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token>().Result;
         }
 
@@ -109,8 +125,12 @@ namespace RingCentral
         {
             var url = new Url(server).AppendPathSegment("/restapi/oauth/token");
             var client = url.WithBasicAuth(appKey, appSecret);
-            var requestBody = new { grant_type = "authorization_code", redirect_uri = redirectUri,
-                code = authCode };
+            var requestBody = new
+            {
+                grant_type = "authorization_code",
+                redirect_uri = redirectUri,
+                code = authCode
+            };
             token = client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token>().Result;
         }
 
