@@ -24,8 +24,3 @@ const generateModel = (segment) => {
 for (const segment of segments) {
     generateModel(segment);
 }
-
-
-const action = actions.get('profile-image').find(item => item.name == 'get');
-const response = action.responseBody();
-console.log(response);

@@ -114,14 +114,14 @@ public Task<PutResponse> Put(PutRequest requestBody, PutQueryParams queryParams 
 
 {% macro delete_action(action) -%}
 {% if action.queryParams() == null %}
-public void Delete()
+public Task<System.Net.Http.HttpResponseMessage> Delete()
 {
-    RC.Delete({{ endpoint(action) }}, null);
+    return RC.Delete({{ endpoint(action) }}, null);
 }
 {% else %}
-public void Delete(DeleteQueryParams queryParams = null)
+public Task<System.Net.Http.HttpResponseMessage> Delete(DeleteQueryParams queryParams = null)
 {
-    RC.Delete({{ endpoint(action) }}, queryParams);
+    return RC.Delete({{ endpoint(action) }}, queryParams);
 }
 {{ action.queryModel('cs', 'DeleteQueryParams') }}
 {% endif %}

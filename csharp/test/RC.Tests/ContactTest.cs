@@ -43,7 +43,7 @@ namespace RingCentral.Test
             var contactId = list.records[0].id;
 
             // delete
-            addressBook.Contact(contactId.ToString()).Delete();
+            var response = addressBook.Contact(contactId.ToString()).Delete().Result;
 
             // search again
             list = addressBook.Contact().List(new Contact.ListQueryParams { phoneNumber = phoneNumber }).Result;
