@@ -1,8 +1,6 @@
 using Flurl;
 using Flurl.Http;
 using System.Threading.Tasks;
-using Flurl.Http.Configuration;
-using Newtonsoft.Json;
 
 namespace RingCentral
 {
@@ -20,11 +18,6 @@ namespace RingCentral
             this.appKey = appKey;
             this.appSecret = appSecret;
             this.server = server;
-
-            FlurlHttp.Configure(c =>
-            {
-                c.JsonSerializer = new NewtonsoftJsonSerializer(new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            });
         }
         public RestClient(string appKey, string appSecret, bool production = false)
             : this(appKey, appSecret, production ? ProductionServer : SandboxServer)
