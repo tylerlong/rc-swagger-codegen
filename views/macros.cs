@@ -21,18 +21,8 @@ public {{ model | pascalCase }} {{ model | pascalCase }}()
 {% endif %}
 {%- endmacro %}
 
-{% import "actions/index.cs" as actions -%}
 
+{% import "actions/index.cs" as actions -%}
 {% macro action(action) -%}
-{% if action.name == 'get' %}
-{{ actions.get_action(action) }}
-{% elif action.name == 'list' %}
-{{ actions.list_action(action) }}
-{% elif action.name == 'post' %}
-{{ actions.post_action(action) }}
-{% elif action.name == 'put' %}
-{{ actions.put_action(action) }}
-{% elif action.name == 'delete' %}
-{{ actions.delete_action(action) }}
-{% endif %}
+    {{ actions[action.name + '_action'](action) }}
 {%- endmacro %}
