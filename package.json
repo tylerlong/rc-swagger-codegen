@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/tylerlong/rc-swagger-codegen#readme",
   "dependencies": {
-    "json2model": "^0.1.6",
+    "json2model": "^0.1.7",
     "lodash": "^4.13.1",
     "nunjucks": "^2.4.2"
   },
