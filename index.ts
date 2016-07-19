@@ -9,11 +9,18 @@ const pascalCase = (str: string): string => {
     return _.upperFirst(_.camelCase(str));
 }
 
+const ltrim = (str: string): string => {
+    const count = str.length - _.trimStart(str).length;
+    const regex = new RegExp(`^\\s{${count}}`, 'mg');
+    return str.replace(regex, '');
+}
+
 const env = nunjucks.configure('views', {
     trimBlocks: true,
     lstripBlocks: true,
 });
 env.addFilter('pascalCase', pascalCase);
+env.addFilter('ltrim', ltrim);
 
 const generateModel = (segment) => {
     const models = Array.from(routes.get(segment) || []);
