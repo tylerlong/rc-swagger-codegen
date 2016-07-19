@@ -16,6 +16,7 @@ const ltrim = (str: string): string => {
 }
 
 const env = nunjucks.configure('views', {
+    autoescape: false,
     trimBlocks: true,
     lstripBlocks: true,
 });
