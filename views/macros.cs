@@ -1,9 +1,9 @@
 {% macro model_constructor(segment, hasId) -%}
-{% if hasId %}
-internal {{ segment | pascalCase }}(Model parent, string _id = null) : base(parent, _id) { }
-{% else %}
-internal {{ segment | pascalCase }}(Model parent) : base(parent, null) { }
-{% endif %}
+    {% if hasId -%}
+        internal {{ segment | pascalCase }}(Model parent, string _id = null) : base(parent, _id) { }
+    {% else -%}
+        internal {{ segment | pascalCase }}(Model parent) : base(parent, null) { }
+    {% endif %}
 {%- endmacro %}
 
 
