@@ -25,5 +25,5 @@
 
 {% macro action(action) -%}
     {% import 'actions/' + action.name + '.cs' as temp %}
-    {{ temp[action.name + '_action'](action) }}
+    {{ temp['action'](action) }}
 {%- endmacro %}

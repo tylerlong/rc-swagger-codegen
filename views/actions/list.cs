@@ -3,7 +3,7 @@ Endpoint({% if action.hasId %}true{% else %}false{% endif %})
 {%- endmacro %}
 
 
-{% macro list_action(action) -%}
+{% macro action(action) -%}
 {% if action.queryParams() == null %}
 public Task<ListResponse> List()
 {

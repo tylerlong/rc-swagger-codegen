@@ -3,7 +3,7 @@ Endpoint({% if action.hasId %}true{% else %}false{% endif %})
 {%- endmacro %}
 
 
-{% macro delete_action(action) -%}
+{% macro action(action) -%}
 {% if action.queryParams() == null %}
 public Task<System.Net.Http.HttpResponseMessage> Delete()
 {
