@@ -22,8 +22,7 @@
 {%- endmacro %}
 
 
-
-{% macro action(action) -%}
+{% macro action(action, segment) -%}
     {% import 'actions/' + action.name + '.cs' as temp %}
-    {{ temp['action'](action) }}
+    {{ temp['action'](action, segment) }}
 {%- endmacro %}

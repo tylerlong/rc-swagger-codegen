@@ -1,3 +1,3 @@
 {% macro endpoint(action) -%}
-Endpoint({% if action.hasId %}true{% else %}false{% endif %})
+    Endpoint({% if action.hasId %}true{% else %}false{% endif %})
 {%- endmacro %}

@@ -24,20 +24,20 @@ namespace RingCentral
 
         {% if actions.has(segment) %}
         {% for action in actions.get(segment) %}
-        {% if action.name == 'get' and segment != 'service-info' and segment != 'content' and segment != 'profile-image' %}
-        {{ macros.action(action) | indent(8, false) }}
+        {% if action.name == 'get' %}
+        {{ macros.action(action, segment) | indent(8, false) }}
         {% endif %}
         {% if action.name == 'delete' %}
-        {{ macros.action(action) | indent(8, false) }}
+        {{ macros.action(action, segment) | indent(8, false) }}
         {% endif %}
-        {% if action.name == 'put' and segment != 'profile-image' and segment != 'extension' %}
-        {{ macros.action(action) | indent(8, false) }}
+        {% if action.name == 'put' %}
+        {{ macros.action(action, segment) | indent(8, false) }}
         {% endif %}
         {% if action.name == 'list' %}
-        {{ macros.action(action) | indent(8, false) }}
+        {{ macros.action(action, segment) | indent(8, false) }}
         {% endif %}
-        {% if action.name == 'post' and segment != 'profile-image' and segment != 'lookup' and segment != 'revoke' and segment != 'end' %}
-        {{ macros.action(action) | indent(8, false) }}
+        {% if action.name == 'post' %}
+        {{ macros.action(action, segment) | indent(8, false) }}
         {% endif %}
         {% endfor %}
         {% endif %}
