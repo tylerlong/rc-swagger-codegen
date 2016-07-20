@@ -23,7 +23,7 @@ const format = (str: string): string => {
         if (line == '}') {
             indent -= 4;
         }
-        result = result + _.repeat(' ', indent) + line + '\n';
+        result += _.repeat(' ', indent) + line + '\n';
         if (line == '{') {
             indent += 4;
         }

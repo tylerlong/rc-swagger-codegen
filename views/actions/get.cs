@@ -1,6 +1,7 @@
-{% import 'endpoint.cs' as endpoint -%}
+{% import 'endpoint.cs' as endpoint %}
 
-{% macro action(action, segment) -%}
+
+{% macro action(action, segment) %}
     {% if segment != 'service-info' and segment != 'content' and segment != 'profile-image' %}
         {% if action.queryParams() == null %}
             public Task<GetResponse> Get()
@@ -12,8 +13,10 @@
             {
                 return RC.Get<GetResponse>({{ endpoint.endpoint(action) }}, queryParams);
             }
+
             {{ action.queryModel('cs', 'GetQueryParams') }}
         {% endif %}
+
         {{ action.responseModel('cs', 'GetResponse') }}
     {% endif %}
-{%- endmacro %}
+{% endmacro %}
