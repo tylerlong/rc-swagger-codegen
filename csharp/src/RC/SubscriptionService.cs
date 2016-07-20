@@ -38,7 +38,7 @@ namespace RingCentral.Subscription
             }
         }
 
-        private Platform platform;
+        private RestClient rc;
         private Pubnub pubnub;
         private SubscriptionInfo _subscriptionInfo;
         private bool renewScheduled = false;
@@ -55,7 +55,7 @@ namespace RingCentral.Subscription
                 {
                     if (!renewScheduled)
                     { // don't do duplicate schedule
-                        TaskEx.Delay((_subscriptionInfo.ExpiresIn - 120) * 1000).ContinueWith((action) =>
+                        Task.Delay((_subscriptionInfo.ExpiresIn - 120) * 1000).ContinueWith((action) =>
                         { // 2 minutes before expiration
                             renewScheduled = false;
                             Renew();
@@ -66,9 +66,9 @@ namespace RingCentral.Subscription
             }
         }
 
-        internal SubscriptionService(Platform platform)
+        internal SubscriptionService(RestClient rc)
         {
-            this.platform = platform;
+            this.rc = rc;
         }
 
         public void Register()
