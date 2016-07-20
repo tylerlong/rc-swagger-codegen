@@ -9,7 +9,6 @@ const pascalCase = (str: string): string => {
     return _.upperFirst(_.camelCase(str));
 }
 
-
 const env = nunjucks.configure('views', {
     autoescape: false,
     trimBlocks: true,
@@ -17,9 +16,25 @@ const env = nunjucks.configure('views', {
 });
 env.addFilter('pascalCase', pascalCase);
 
+const format = (str: string): string => {
+    let indent = 0;
+    let result = '';
+    for(const line of str.replace(/\s+$/mg, '').replace(/\n{2,}/g, '\n').split('\n').map(item => item.trim())) {
+        if (line == '}') {
+            indent -= 4;
+        }
+        result = result + _.repeat(' ', indent) + line + '\n';
+        if (line == '{') {
+            indent += 4;
+        }
+    }
+    return result;
+}
+
 const generateModel = (segment) => {
     const models = Array.from(routes.get(segment) || []);
-    const result = env.render("model.cs", { segment, models, hasIds, actions });
+    let result = env.render("model.cs", { segment, models, hasIds, actions });
+    result = format(result);
     fs.writeFileSync(`csharp/src/RC/Generated/${pascalCase(segment)}.cs`, result);
 }
 
