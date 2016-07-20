@@ -1,18 +1,15 @@
-{% macro endpoint(action) -%}
-Endpoint({% if action.hasId %}true{% else %}false{% endif %})
-{%- endmacro %}
-
+{% import 'endpoint.cs' as endpoint -%}
 
 {% macro action(action) -%}
 {% if action.queryParams() == null %}
 public Task<System.Net.Http.HttpResponseMessage> Delete()
 {
-    return RC.Delete({{ endpoint(action) }}, null);
+    return RC.Delete({{ endpoint.endpoint(action) }}, null);
 }
 {% else %}
 public Task<System.Net.Http.HttpResponseMessage> Delete(DeleteQueryParams queryParams = null)
 {
-    return RC.Delete({{ endpoint(action) }}, queryParams);
+    return RC.Delete({{ endpoint.endpoint(action) }}, queryParams);
 }
 {{ action.queryModel('cs', 'DeleteQueryParams') }}
 {% endif %}

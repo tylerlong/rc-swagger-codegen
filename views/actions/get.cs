@@ -1,18 +1,15 @@
-{% macro endpoint(action) -%}
-Endpoint({% if action.hasId %}true{% else %}false{% endif %})
-{%- endmacro %}
-
+{% import 'endpoint.cs' as endpoint -%}
 
 {% macro action(action) -%}
 {% if action.queryParams() == null %}
 public Task<GetResponse> Get()
 {
-    return RC.Get<GetResponse>({{ endpoint(action) }}, null);
+    return RC.Get<GetResponse>({{ endpoint.endpoint(action) }}, null);
 }
 {% else %}
 public Task<GetResponse> Get(GetQueryParams queryParams = null)
 {
-    return RC.Get<GetResponse>({{ endpoint(action) }}, queryParams);
+    return RC.Get<GetResponse>({{ endpoint.endpoint(action) }}, queryParams);
 }
 {{ action.queryModel('cs', 'GetQueryParams') }}
 {% endif %}
