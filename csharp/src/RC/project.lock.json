@@ -389,22 +389,6 @@
           "lib/netstandard1.0/Newtonsoft.Json.dll": {}
         }
       },
-      "Portable.BouncyCastle-Signed/1.7.0.2": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+dnxcore50+wp80+win+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+dnxcore50+wp80+win+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.dll": {}
-        }
-      },
-      "PubnubPCL/3.7.7": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "7.0.1",
-          "Portable.BouncyCastle-Signed": "1.7.0.2"
-        }
-      },
       "runtime.native.System/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -2577,31 +2561,6 @@
         "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.xml",
         "tools/install.ps1"
-      ]
-    },
-    "Portable.BouncyCastle-Signed/1.7.0.2": {
-      "sha512": "aBVsV7h2b0nfKUrp63MDXH181qqC7RSf/AjuUViUigyRy7CAXC9/On7Gyg/IXM3FR/wMEbjAJXvSS3SsJiet/g==",
-      "type": "package",
-      "path": "Portable.BouncyCastle-Signed/1.7.0.2",
-      "files": [
-        "License.html",
-        "Portable.BouncyCastle-Signed.1.7.0.2.nupkg.sha512",
-        "Portable.BouncyCastle-Signed.nuspec",
-        "Readme.html",
-        "lib/portable-net4+sl5+wp8+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.dll",
-        "lib/portable-net4+sl5+wp8+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.xml",
-        "lib/portable-net45+dnxcore50+wp80+win+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.dll",
-        "lib/portable-net45+dnxcore50+wp80+win+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.xml"
-      ]
-    },
-    "PubnubPCL/3.7.7": {
-      "sha512": "a+h2mUeShtIkzp4EX4ZqdJAYDtNjqzEKn3wfIWvukD0QrXqk9yBPuZXTVboepJ4iXfx9aC7ZNqUc2zIoEQKhzw==",
-      "type": "package",
-      "path": "PubnubPCL/3.7.7",
-      "files": [
-        "PubnubPCL.3.7.7.nupkg.sha512",
-        "PubnubPCL.nuspec",
-        "lib/portable-net40+sl50+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10/PubNub-Messaging.dll"
       ]
     },
     "runtime.native.System/4.0.0": {
@@ -6903,8 +6862,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Flurl >= 2.1.0",
-      "Flurl.Http >= 1.0.0",
-      "PubnubPCL >= 3.7.7"
+      "Flurl.Http >= 1.0.0"
     ],
     ".NETCoreApp,Version=v1.0": [
       "Microsoft.NETCore.App >= 1.0.0"
