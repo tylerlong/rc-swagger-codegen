@@ -41,16 +41,13 @@ namespace RingCentral.Test
             Thread.Sleep(5000); // avoid 429
 
             // search
-            list = addressBook.Contact().List(new Contact.ListQueryParams { phoneNumber = phoneNumber }).Result;
+            list = addressBook.Contact().List(new { phoneNumber = phoneNumber }).Result;
             Assert.Equal(1, list.paging.totalElements);
             var contactId = list.records[0].id;
 
             // update
-            var contact2 = addressBook.Contact(contactId.ToString()).Put(new Contact.PutRequest{
-                firstName = "Tyler",
-                lastName = "Liu",
-                homePhone = phoneNumber
-            }).Result;
+            contact.lastName = "Liu";
+            var contact2 = addressBook.Contact(contactId.ToString()).Put(contact).Result;
             Assert.NotNull(contact2);
             Assert.Equal("Liu", contact2.lastName);
 
@@ -66,7 +63,7 @@ namespace RingCentral.Test
             var response = addressBook.Contact(contactId.ToString()).Delete().Result;
 
             // search again
-            list = addressBook.Contact().List(new Contact.ListQueryParams { phoneNumber = phoneNumber }).Result;
+            list = addressBook.Contact().List(new { phoneNumber = phoneNumber }).Result;
             Assert.Equal(0, list.paging.totalElements);
         }
     }
