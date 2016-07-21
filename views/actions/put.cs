@@ -4,18 +4,30 @@
 {% macro action(action, segment) %}
     {% if segment != 'profile-image' and segment != 'extension' %}
         {% if action.queryParams() == null %}
-            public Task<PutResponse> Put(PutRequest requestBody)
+            public Task<PutResponse> Put(object requestBody)
             {
                 return RC.Put<PutResponse>({{ endpoint.endpoint(action) }}, requestBody, null);
             }
+            public Task<PutResponse> Put(PutRequest requestBody)
+            {
+                return Put(requestBody as object);
+            }
         {% else %}
-            public Task<PutResponse> Put(PutRequest requestBody, object queryParams)
+            public Task<PutResponse> Put(object requestBody, object queryParams)
             {
                 return RC.Put<PutResponse>({{ endpoint.endpoint(action) }}, requestBody, queryParams);
             }
-            public Task<PutResponse> Put(PutRequest requestBody, PutQueryParams queryParams = null)
+            public Task<PutResponse> Put(PutRequest requestBody, object queryParams)
+            {
+                return Put(requestBody as object, queryParams);
+            }
+            public Task<PutResponse> Put(object requestBody, PutQueryParams queryParams = null)
             {
                 return Put(requestBody, queryParams as object);
+            }
+            public Task<PutResponse> Put(PutRequest requestBody, PutQueryParams queryParams = null)
+            {
+                return Put(requestBody as object, queryParams as object);
             }
 
             {{ action.queryModel('cs', 'PutQueryParams') }}
