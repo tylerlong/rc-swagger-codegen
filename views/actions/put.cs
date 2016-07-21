@@ -9,9 +9,13 @@
                 return RC.Put<PutResponse>({{ endpoint.endpoint(action) }}, requestBody, null);
             }
         {% else %}
-            public Task<PutResponse> Put(PutRequest requestBody, PutQueryParams queryParams = null)
+            public Task<PutResponse> Put(PutRequest requestBody, object queryParams)
             {
                 return RC.Put<PutResponse>({{ endpoint.endpoint(action) }}, requestBody, queryParams);
+            }
+            public Task<PutResponse> Put(PutRequest requestBody, PutQueryParams queryParams = null)
+            {
+                return Put(requestBody, queryParams as object);
             }
 
             {{ action.queryModel('cs', 'PutQueryParams') }}

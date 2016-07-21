@@ -9,9 +9,13 @@
                 return RC.Get<GetResponse>({{ endpoint.endpoint(action) }}, null);
             }
         {% else %}
-            public Task<GetResponse> Get(GetQueryParams queryParams = null)
+            public Task<GetResponse> Get(object queryParams)
             {
                 return RC.Get<GetResponse>({{ endpoint.endpoint(action) }}, queryParams);
+            }
+            public Task<GetResponse> Get(GetQueryParams queryParams = null)
+            {
+                return Get(queryParams as object);
             }
 
             {{ action.queryModel('cs', 'GetQueryParams') }}

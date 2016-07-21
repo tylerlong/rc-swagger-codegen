@@ -8,9 +8,13 @@
             return RC.Get<ListResponse>({{ endpoint.endpoint(action) }}, null);
         }
     {% else %}
-        public Task<ListResponse> List(ListQueryParams queryParams = null)
+        public Task<ListResponse> List(object queryParams)
         {
             return RC.Get<ListResponse>({{ endpoint.endpoint(action) }}, queryParams);
+        }
+        public Task<ListResponse> List(ListQueryParams queryParams = null)
+        {
+            return List(queryParams as object);
         }
 
         {{ action.queryModel('cs', 'ListQueryParams') }}
