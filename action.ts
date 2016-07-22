@@ -32,11 +32,17 @@ class Action {
         return this.method;
     }
 
-    private getSampleValue(type: string): any {
+    private getSampleValue(type: string, format: string): any {
         switch (type) {
             case 'integer':
+                if (format == 'int64') {
+                    return 2147483648;
+                }
                 return 1;
             case 'string':
+                if (format == 'binary') {
+                    return 'binary';
+                }
                 return 's';
             case 'boolean':
                 return true;
@@ -57,7 +63,7 @@ class Action {
                 if (type == 'array') {
                     result[prop] = [this.getSampleSchema(props[prop].items)];
                 } else {
-                    result[prop] = this.getSampleValue(type);
+                    result[prop] = this.getSampleValue(type, props[prop].format);
                 }
             }
         }
@@ -76,10 +82,7 @@ class Action {
             return schema.enum.map(item => this.getSampleSchema(item));
         }
         if (schema.type != undefined) {
-            if(schema.type == 'string' && schema.format == 'binary') {
-                return 'binary';
-            }
-            return this.getSampleValue(schema.type);
+            return this.getSampleValue(schema.type, schema.format);
         }
         throw `unexpected schema: ${schema}`;
     }
@@ -103,7 +106,7 @@ class Action {
         }
         const result = {};
         for (const parameter of parameters) {
-            result[parameter.name] = this.getSampleValue(parameter.type);
+            result[parameter.name] = this.getSampleValue(parameter.type, parameter.format);
         }
         return result;
     }
