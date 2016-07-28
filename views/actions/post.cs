@@ -3,15 +3,17 @@
 
 {% macro action(action, segment) %}
     {% if segment != 'profile-image' and segment != 'lookup' and segment != 'revoke' and segment != 'end' %}
-        {% if action.queryParams() == null and segment != 'fax' %}
-            public Task<PostResponse> Post(object requestBody)
-            {
-                return RC.Post<PostResponse>({{ endpoint.endpoint(action) }}, requestBody, null);
-            }
-            public Task<PostResponse> Post(PostRequest requestBody)
-            {
-                return Post(requestBody as object);
-            }
+        {% if action.queryParams() == null %}
+            {% if segment != 'fax' %}
+                public Task<PostResponse> Post(object requestBody)
+                {
+                    return RC.Post<PostResponse>({{ endpoint.endpoint(action) }}, requestBody, null);
+                }
+                public Task<PostResponse> Post(PostRequest requestBody)
+                {
+                    return Post(requestBody as object);
+                }
+            {% endif %}
         {% else %}
             public Task<PostResponse> Post(object requestBody, object queryParams)
             {
