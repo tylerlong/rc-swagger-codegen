@@ -5271,7 +5271,7 @@
                     "$ref": "#/definitions/CallerInfo"
                   }
                 },
-                "resolution": {
+                "faxResolution": {
                   "type": "string",
                   "description": "Fax resolution",
                   "enum": [
