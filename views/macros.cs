@@ -9,9 +9,13 @@
 
 {% macro model_route(model, hasId) %}
     {% if hasId %}
-        public {{ model | pascalCase }} {{ model | pascalCase }}(string _id = {% if model == 'account' or model == 'extension' %}"~"{% else %}null{% endif %})
+        public {{ model | pascalCase }} {{ model | pascalCase }}(ID _id)
         {
             return new {{ model | pascalCase }}(this, _id);
+        }
+        public {{ model | pascalCase }} {{ model | pascalCase }}()
+        {
+            return new {{ model | pascalCase }}(this, {% if model == 'account' or model == 'extension' %}"~"{% else %}null{% endif %});
         }
     {% else %}
         public {{ model | pascalCase }} {{ model | pascalCase }}()

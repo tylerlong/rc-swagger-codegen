@@ -47,12 +47,12 @@ namespace RingCentral.Test
 
             // update
             contact.lastName = "Liu";
-            var contact2 = addressBook.Contact(contactId.ToString()).Put(contact).Result;
+            var contact2 = addressBook.Contact(contactId).Put(contact).Result;
             Assert.NotNull(contact2);
             Assert.Equal("Liu", contact2.lastName);
 
             // get
-            var contact3 = addressBook.Contact(contactId.ToString()).Get().Result;
+            var contact3 = addressBook.Contact(contactId).Get().Result;
             Assert.NotNull(contact3);
             Assert.Equal("Tyler", contact3.firstName);
             Assert.Equal("Liu", contact3.lastName);
@@ -60,7 +60,7 @@ namespace RingCentral.Test
             Thread.Sleep(5000); // avoid 429
 
             // delete
-            var response = addressBook.Contact(contactId.ToString()).Delete().Result;
+            var response = addressBook.Contact(contactId).Delete().Result;
 
             // search again
             list = addressBook.Contact().List(new { phoneNumber = phoneNumber }).Result;
