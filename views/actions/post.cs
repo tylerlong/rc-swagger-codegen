@@ -52,7 +52,9 @@
             {{ action.queryModel('cs', 'PostQueryParams') }}
         {% endif %}
 
-        {% if action.requestBody() != null %}{{ action.requestModel('cs', 'PostRequest') }}{% endif %}
+        {% if action.requestBody() != null %}
+            {{ action.requestModel('cs', 'PostRequest') }}
+        {% endif %}
         {% if action.responseBody() != null %}
             {{ action.responseModel('cs', 'PostResponse') }}
         {% else %}
