@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 class Action {
     path: string;
     segment: string;
+    parent: string;
     hasId: boolean;
     method: string;
     name: string;
@@ -15,6 +16,7 @@ class Action {
         this.method = method;
         this.name = this.getName();
         this.segment = path.split('/').reverse().find((item) => isValidSegment(item));
+        this.parent = path.split('/').reverse().filter((item) => isValidSegment(item))[1];
         this.hasId = !isValidSegment(path.split('/').reverse()[0]);
     }
 
