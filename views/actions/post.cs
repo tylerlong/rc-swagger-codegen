@@ -2,17 +2,24 @@
 
 
 {% macro action(action, segment) %}
-    {% if segment != 'profile-image' and segment != 'end' %}
+    {% if segment != 'profile-image' %}
         {% if action.queryParams() == null %}
             {% if segment != 'fax' %}
-                public Task<PostResponse> Post(object requestBody)
-                {
-                    return RC.Post<PostResponse>({{ endpoint.endpoint(action) }}, requestBody, null);
-                }
-                public Task<PostResponse> Post(PostRequest requestBody)
-                {
-                    return Post(requestBody as object);
-                }
+                {% if action.requestBody() == null %}
+                    public Task<PostResponse> Post()
+                    {
+                        return RC.Post<PostResponse>({{ endpoint.endpoint(action) }}, null, null);
+                    }
+                {% else %}
+                    public Task<PostResponse> Post(object requestBody)
+                    {
+                        return RC.Post<PostResponse>({{ endpoint.endpoint(action) }}, requestBody, null);
+                    }
+                    public Task<PostResponse> Post(PostRequest requestBody)
+                    {
+                        return Post(requestBody as object);
+                    }
+                {% endif %}
             {% endif %}
         {% else %}
             {% if action.requestBody() == null %}
@@ -45,7 +52,7 @@
             {{ action.queryModel('cs', 'PostQueryParams') }}
         {% endif %}
 
-        {{ action.requestModel('cs', 'PostRequest') }}
+        {% if action.requestBody() != null %}{{ action.requestModel('cs', 'PostRequest') }}{% endif %}
         {% if action.responseBody() != null %}
             {{ action.responseModel('cs', 'PostResponse') }}
         {% else %}
