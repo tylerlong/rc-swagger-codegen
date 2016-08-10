@@ -36,69 +36,6 @@ class Action {
         return this.method;
     }
 
-    private getSampleValue(type: string, format: string): any {
-        switch (type) {
-            case 'integer':
-                if (format == 'int64') {
-                    return 2147483648;
-                }
-                return 1;
-            case 'string':
-                if (format == 'binary') {
-                    return 'binary';
-                }
-                return 's';
-            case 'boolean':
-                return true;
-            case 'number':
-                return 3.14;
-            default:
-                throw `unknown type: ${type}`;
-        }
-    }
-
-    private getSampleProps(props: any): any {
-        const result = {};
-        for (const prop of Object.keys(props)) {
-            if (props[prop]['$ref'] != undefined) {
-                result[prop] = this.getSampleSchema(props[prop]);
-            } else {
-                const type = props[prop].type;
-                if (type == 'array') {
-                    result[prop] = [this.getSampleSchema(props[prop].items)];
-                } else {
-                    result[prop] = this.getSampleValue(type, props[prop].format);
-                }
-            }
-        }
-        return result;
-    }
-
-    private getSampleSchema(schema: any) {
-        if (schema.properties != undefined) {
-            return this.getSampleProps(schema.properties);
-        }
-        if (schema['$ref'] != undefined) {
-            const refTokens = schema['$ref'].split('/');
-            return this.getSampleProps(swagger[refTokens[1]][refTokens[2]].properties);
-        }
-        if (schema.enum != undefined) {
-            return schema.enum.map(item => this.getSampleSchema(item));
-        }
-        if (schema.type != undefined) {
-            return this.getSampleValue(schema.type, schema.format);
-        }
-        throw `unexpected schema: ${schema}`;
-    }
-
-    private json2model(json: string, language: string, name: string): string {
-        if (json == null) {
-            return null;
-        }
-        const { render } = require(`json2model/controllers/${language}`);
-        return render(name, json, false);
-    }
-
     public queryParams(): any {
         let parameters: Array<any> = swagger.paths[this.path][this.method].parameters;
         if (parameters == undefined) {
