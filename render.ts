@@ -2,7 +2,7 @@ import { swagger } from './swagger';
 
 
 import * as nunjucks from 'nunjucks';
-const env = nunjucks.configure('views/csharp', {
+const env = nunjucks.configure('views/definitions', {
   autoescape: false,
   trimBlocks: true,
   lstripBlocks: true,

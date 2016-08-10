@@ -1,7 +1,7 @@
 import { isValidSegment } from './util';
 import { swagger, paths } from './swagger';
 import * as _ from 'lodash';
-import { renderModel } from './new';
+import { renderModel } from './render';
 import { pascalCase } from 'change-case';
 
 

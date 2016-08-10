@@ -3,7 +3,7 @@ import * as nunjucks from 'nunjucks';
 import * as fs from 'fs';
 import { actions } from './action';
 import * as _ from 'lodash';
-import { renderModel } from './new';
+import { renderModel } from './render';
 
 
 const pascalCase = (str: string): string => {
