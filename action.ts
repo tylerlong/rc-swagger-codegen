@@ -2,6 +2,7 @@ import { isValidSegment } from './util';
 import { swagger, paths } from './swagger';
 import * as _ from 'lodash';
 import { renderModel } from './new';
+import { pascalCase } from 'change-case';
 
 
 class Action {
@@ -137,16 +138,15 @@ class Action {
         if (schema == undefined) {
             return null;
         }
-        return this.getSampleSchema(schema);
+        return schema;
     }
     public responseModel(language: string, name: string): string {
-        return this.json2model(this.responseBody(), language, name);
+        return renderModel(pascalCase(name), this.responseBody());
     }
 
     public equals(other: Action): boolean {
-        return (this.segment == other.segment && this.hasId == other.hasId && this.method == other.method
-            && this.name == other.name
-            && _.isEqual(this.requestBody(), other.requestBody()) && _.isEqual(this.responseBody(), other.responseBody()));
+        return (this.segment == other.segment && this.hasId == other.hasId
+            && this.method == other.method && this.name == other.name);
     }
 }
 

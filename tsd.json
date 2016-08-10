@@ -16,6 +16,9 @@
     },
     "lodash/lodash.d.ts": {
       "commit": "95eb7b2527a28281cdbf480c0560744bc5190465"
+    },
+    "change-case/change-case.d.ts": {
+      "commit": "5ff2770b384dcfef0c25b04472f59d3fc39e1919"
     }
   }
 }

@@ -111,16 +111,16 @@ describe("actions", () => {
     //     });
     // });
     describe("responseBody", () => {
-        it("should generate for create meeting", () => {
-            const action = actions.get('meeting').find(item => item.method == 'post');
-            expect(action).not.toBe(null);
-            const responseBody = action.responseBody();
-            expect(responseBody).not.toEqual({});
-            expect(responseBody).toEqual({ uri: 's', id: 's', topic: 's', meetingType: 's', password: 's',
-                status: 's', links: { startUri: 's', joinUri: 's' }, schedule: { startTime: 's', durationInMinutes: 1,
-                timeZone: { id: 's' }}, allowJoinBeforeHost: true, startHostVideo: true,
-                startParticipantsVideo: true, audioOptions: ['s']});
-        });
+        // it("should generate for create meeting", () => {
+        //     const action = actions.get('meeting').find(item => item.method == 'post');
+        //     expect(action).not.toBe(null);
+        //     const responseBody = action.responseBody();
+        //     expect(responseBody).not.toEqual({});
+        //     expect(responseBody).toEqual({ uri: 's', id: 's', topic: 's', meetingType: 's', password: 's',
+        //         status: 's', links: { startUri: 's', joinUri: 's' }, schedule: { startTime: 's', durationInMinutes: 1,
+        //         timeZone: { id: 's' }}, allowJoinBeforeHost: true, startHostVideo: true,
+        //         startParticipantsVideo: true, audioOptions: ['s']});
+        // });
         it("should have no response body for delete meeting", () => {
             const action = actions.get('meeting').find(item => item.method == 'delete');
             expect(action).not.toBe(null);
@@ -131,7 +131,7 @@ describe("actions", () => {
             const action = actions.get('profile-image').find(item => item.method == 'get');
             expect(action).not.toBe(null);
             const responseBody = action.responseBody();
-            expect(responseBody).toBe('binary');
+            expect(responseBody).toEqual({ type: 'string', format: 'binary' });
         });
     });
 });
