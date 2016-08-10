@@ -40,14 +40,14 @@ describe("action", () => {
         });
     });
 
-    describe("queryParams", () => {
-        it('should generate queryParams', () => {
-            let action = new Action('/restapi/v1.0/dictionary/state', 'get');
-            expect(action.queryParams()).toEqual({ page: 1, perPage: 1, countryId: 1, withPhoneNumbers: true });
-            action = new Action('/restapi/v1.0/account/{accountId}/phone-number', 'get');
-            expect(action.queryParams()).toEqual({ page: 1, perPage: 1, usageType: 's' });
-        });
-    });
+    // describe("queryParams", () => {
+    //     it('should generate queryParams', () => {
+    //         let action = new Action('/restapi/v1.0/dictionary/state', 'get');
+    //         expect(action.queryParams()).toEqual({ page: 1, perPage: 1, countryId: 1, withPhoneNumbers: true });
+    //         action = new Action('/restapi/v1.0/account/{accountId}/phone-number', 'get');
+    //         expect(action.queryParams()).toEqual({ page: 1, perPage: 1, usageType: 's' });
+    //     });
+    // });
 
     describe("requestBody", () => {
         it('should generate requestBody', () => {
