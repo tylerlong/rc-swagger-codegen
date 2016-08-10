@@ -1,8 +1,9 @@
-import { segments, routes, hasIds } from './swagger';
+import { swagger, segments, routes, hasIds } from './swagger';
 import * as nunjucks from 'nunjucks';
 import * as fs from 'fs';
 import { actions } from './action';
 import * as _ from 'lodash';
+import { renderModel } from './new';
 
 
 const pascalCase = (str: string): string => {
@@ -41,3 +42,10 @@ const generateModel = (segment) => {
 for (const segment of segments) {
     generateModel(segment);
 }
+
+// generate definitions
+let temp = '';
+for (let key of Object.keys(swagger.definitions)) {
+  temp += format(renderModel(key)) + '\n\n';
+}
+fs.writeFileSync('csharp/src/RC/Generated/Definitions.cs', temp);

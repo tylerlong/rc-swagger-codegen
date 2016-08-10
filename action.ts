@@ -126,10 +126,10 @@ class Action {
         if (bodyParam == undefined) {
             return null;
         }
-        return this.getSampleSchema(bodyParam.schema);
+        return bodyParam.schema;
     }
     public requestModel(language: string, name: string): string {
-        return this.json2model(this.requestBody(), language, name);
+        return renderModel(name, this.requestBody());
     }
 
     public responseBody(): any {
