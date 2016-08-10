@@ -1,6 +1,7 @@
 import { isValidSegment } from './util';
 import { swagger, paths } from './swagger';
 import * as _ from 'lodash';
+import { renderModel } from './new';
 
 
 class Action {
@@ -106,14 +107,14 @@ class Action {
         if (parameters.length == 0) {
             return null;
         }
-        const result = {};
+        const result = { properties: {} };
         for (const parameter of parameters) {
-            result[parameter.name] = this.getSampleValue(parameter.type, parameter.format);
+            result.properties[parameter.name] = parameter;
         }
         return result;
     }
     public queryModel(language: string, name: string): string {
-        return this.json2model(this.queryParams(), language, name);
+        return renderModel(name, this.queryParams());
     }
 
     public requestBody(): any {
@@ -144,7 +145,7 @@ class Action {
 
     public equals(other: Action): boolean {
         return (this.segment == other.segment && this.hasId == other.hasId && this.method == other.method
-            && this.name == other.name && _.isEqual(this.queryParams(), other.queryParams())
+            && this.name == other.name
             && _.isEqual(this.requestBody(), other.requestBody()) && _.isEqual(this.responseBody(), other.responseBody()));
     }
 }
