@@ -20,6 +20,9 @@ const getType = (value) => {
     return (value.items.type || _.last<string>(value.items['$ref'].split('/')).replace(/\./g, '_')) + '[]';
   }
   if (type == 'integer') {
+    if(value.format == 'int64') {
+      return 'long?';
+    }
     return 'int?';
   }
   if (type == 'boolean') {
