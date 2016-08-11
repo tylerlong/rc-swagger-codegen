@@ -82,6 +82,9 @@ class Action {
     }
 
     public equals(other: Action): boolean {
+        if(this.segment == 'service-info' && this.method == 'get') {
+            return false;
+        }
         return (this.segment == other.segment && this.hasId == other.hasId
             && this.method == other.method && this.name == other.name);
     }
