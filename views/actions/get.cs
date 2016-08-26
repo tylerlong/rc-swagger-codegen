@@ -2,9 +2,7 @@
 
 
 {% macro action(action, segment) %}
-    {% if segment == 'service-info' %}
-        {{ action.responseModel('cs', action.parent + '-' + segment) }}
-    {% elif segment != 'content' and segment != 'profile-image' %}
+    {% if segment != 'content' and segment != 'profile-image' and not (segment == 'service-info' and action.parent == 'account') %}
         {% if action.queryParams() == null %}
             public Task<GetResponse> Get()
             {
