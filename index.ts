@@ -44,8 +44,9 @@ for (const segment of segments) {
 }
 
 // generate definitions
-let temp = '';
+let temp = 'namespace RingCentral\n{\n\n';
 for (let key of Object.keys(swagger.definitions)) {
   temp += format(renderModel(key)) + '\n\n';
 }
+temp += '}';
 fs.writeFileSync('csharp/src/RC/Generated/Definitions.cs', temp);
