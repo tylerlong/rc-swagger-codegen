@@ -1818,6 +1818,15 @@
         }
       }
     },
+    "ImageUri": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "Link to an image."
+        }
+      }
+    },
     "LanguageInfo": {
       "type": "object",
       "properties": {
@@ -2948,7 +2957,7 @@
           "type": "array",
           "description": "List of URIs to profile images in different dimensions",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/ImageUri"
           }
         }
       }
