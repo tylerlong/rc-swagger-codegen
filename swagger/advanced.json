@@ -1309,8 +1309,11 @@
           "description": "Contact detailed information"
         },
         "departments": {
-          "$ref": "#/definitions/DepartmentInfo",
-          "description": "Information on department extension(s), to which the requested extension belongs. Returned only for user extensions, members of department, requested by single extensionId"
+          "type": "array",
+          "description": "Information on department extension(s), to which the requested extension belongs. Returned only for user extensions, members of department, requested by single extensionId",
+          "items": {
+            "$ref": "#/definitions/DepartmentInfo"
+          }
         },
         "extensionNumber": {
           "type": "string",
