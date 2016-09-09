@@ -2550,6 +2550,15 @@
         }
       }
     },
+    "PermissionDetailsInfo": {
+      "type": "object",
+      "properties": {
+        "permission": {
+          "$ref": "#/definitions/UserPermissionInfo",
+          "description": "Information on a permission checked"
+        }
+      }
+    },
     "PermissionInfo": {
       "type": "object",
       "properties": {
@@ -3646,6 +3655,35 @@
         "phoneNumber": {
           "type": "string",
           "description": "Phone number to which the call is forwarded"
+        }
+      }
+    },
+    "UserPermission": {
+      "type": "object",
+      "properties": {
+        "permission": {
+          "$ref": "#/definitions/UserPermissionInfo",
+          "description": "Information on a permission granted"
+        },
+        "scopes": {
+          "type": "array",
+          "description": "List of active scopes for permission",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UserPermissionInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Internal identifier of a permission"
+        },
+        "uri": {
+          "type": "string",
+          "description": "Canonical URI of a permission resource"
         }
       }
     },
@@ -4911,6 +4949,96 @@
         },
         {
           "$ref": "#/parameters/answeringRuleId"
+        }
+      ]
+    },
+    "/restapi/v1.0/account/{accountId}/extension/{extensionId}/authz-profile": {
+      "get": {
+        "description": "Get User Permissions",
+        "responses": {
+          "default": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "uri": {
+                  "type": "string",
+                  "description": "Canonical URI of an authorization profile resource"
+                },
+                "permissions": {
+                  "type": "array",
+                  "description": "List of user permissions granted",
+                  "items": {
+                    "$ref": "#/definitions/UserPermission"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/accountId"
+        },
+        {
+          "$ref": "#/parameters/extensionId"
+        }
+      ]
+    },
+    "/restapi/v1.0/account/{accountId}/extension/{extensionId}/authz-profile/check": {
+      "get": {
+        "description": "Check User Permissions",
+        "responses": {
+          "default": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "uri": {
+                  "type": "string",
+                  "description": "Canonical URI of a permission resource"
+                },
+                "successful": {
+                  "type": "boolean",
+                  "description": "Specifies if check result is successful or not"
+                },
+                "details": {
+                  "$ref": "#/definitions/PermissionDetailsInfo",
+                  "description": "Information on a permission checked. Returned if successful is 'True'"
+                },
+                "scopes": {
+                  "type": "array",
+                  "description": "List of active scopes for permission. Returned if successful is 'True'",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "description": "Permission to check",
+            "name": "permissionId",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "Optional. Internal identifier of an extension for which user permissions are to be checked. The default value is the currently logged-in extension",
+            "name": "targetExtensionId",
+            "in": "query"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/accountId"
+        },
+        {
+          "$ref": "#/parameters/extensionId"
         }
       ]
     },
